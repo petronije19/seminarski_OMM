@@ -5,7 +5,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 
-\title{Seminarski rad: Osnove matematičkog modeliranja}
+\title{Seminarski rad: Osnove matematičkog modeliranja\\ Ulični psi i šinteri}
 \author{Milica Šuka 293/2021 \\ Petar Popović 75/2021}
 \date{jun 2026.}
 
@@ -38,7 +38,7 @@ Klasičan logistički model rasta populacije bez uticaja čoveka opisan je difer
 \frac{dx}{dt} = r x \left(1 - \frac{x}{K}\right).
 \end{equation}
 
-Uvođenjem stope eutanazije, koja direktno zavisi od trenutne gustine populacije $x(t)$, dobijamo konačnu nelinearnu običnu diferencijalnu jednačinu prvog reda koja opisuje naš model:
+Uvođenjem stope eutanazije, koja direktno zavisi od trenutne gustine populacije $x(t)$, dobijamo konačnu nelinearnu diferencijalnu jednačinu prvog reda koja opisuje naš model:
 \begin{equation}
 \frac{dx}{dt} = r x \left(1 - \frac{x}{K}\right) - \epsilon x.
 \end{equation}
@@ -50,7 +50,7 @@ Sređivanjem desne strane prethodne jednačine, model možemo zapisati u ekvival
 
 \section{Analitičko rešenje diferencijalne jednačine}
 
-Kako bismo precizno analizirali ponašanje populacije uličnih pasa kroz vreme, jednačinu rešavamo egzaktno. Uočavamo da je jednačina nelinearna obična diferencijalna jednačina prvog reda koja se može rešiti metodom razdvajanja promenljivih:
+Kako bismo precizno analizirali ponašanje populacije uličnih pasa kroz vreme, jednačinu rešavamo egzaktno. Uočavamo da je jednačina nelinearna diferencijalna jednačina prvog reda koja se može rešiti metodom razdvajanja promenljivih:
 \begin{equation}
 \frac{dx}{dt} = x \left((r - \epsilon) - \frac{r}{K}x\right).
 \end{equation}
@@ -143,7 +143,7 @@ U zavisnosti od vrednosti parametra $\epsilon$ koji kontroliše šinterska služ
 
 Na osnovu teorijske analize i generisanog grafika sa slike \ref{fig:grafik_pasa}, diskutujemo sledeće slučajeve:
 \begin{enumerate}
-    \item \textbf{Slučaj $\epsilon = 0.36$ i $\epsilon = 0.25$:} Stopa eutanazije je veća od stope rasta, odnosno $\epsilon > r = 0.22$. Član $r - \epsilon$ je negativan, pa u limitu $t \to \infty$ populacija teži tački $x_1^* = 0$. Crvena linija, koja odgovara vrednosti $\epsilon = 0.36$, opada najbrže i oko 25. godine postaje veoma bliska nuli, odnosno praktično zanemarljiva, dok zelena linija, koja odgovara vrednosti $\epsilon = 0.25$, sporije teži nuli.
+    \item \textbf{Slučaj $\epsilon = 0.36$ i $\epsilon = 0.25$:} Stopa eutanazije je veća od stope rasta, odnosno $\epsilon > r = 0.22$. Član $r - \epsilon$ je negativan, pa u limesu $t \to \infty$ populacija teži tački $x_1^* = 0$. Crvena linija, koja odgovara vrednosti $\epsilon = 0.36$, opada najbrže i oko 25. godine postaje veoma bliska nuli, odnosno praktično zanemarljiva, dok zelena linija, koja odgovara vrednosti $\epsilon = 0.25$, sporije teži nuli.
     \item \textbf{Slučaj $\epsilon = 0.14$:} Stopa eutanazije je manja od stope priraštaja, odnosno $\epsilon < r$. Pošto je $r - \epsilon > 0$, populacija opstaje i stabilizuje se na nivou:
     \begin{equation}
     x_2^* = 250 \left(1 - \frac{0.14}{0.22}\right) \approx 90.91 \, \text{jedinki/km}^2.
