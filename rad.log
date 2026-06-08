@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.2)  9 JUN 2026 00:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.2)  9 JUN 2026 00:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -207,7 +207,7 @@ File: grafik_napusteni.png Graphic file (type png)
 <use grafik_napusteni.png>
 Package pdftex.def Info: grafik_napusteni.png  used on input line 255.
 (pdftex.def)             Requested size: 312.00119pt x 187.86475pt.
- [8 <./grafik_napusteni.png (PNG copy)>] [9] [10] [11] (./rad.aux)
+ [8 <./grafik_napusteni.png (PNG copy)>] [9] [10] (./rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -234,10 +234,10 @@ pe1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/
 sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sftt1200.pfb>
-Output written on rad.pdf (11 pages, 379160 bytes).
+Output written on rad.pdf (10 pages, 371615 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 73 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
