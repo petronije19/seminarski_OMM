@@ -1,12 +1,13 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[serbian]{babel} % Podrška za srpski jezik i gramatiku
-\usepackage{amsmath} % Paket za matematičke komande
-\usepackage{graphicx} % Omogućava ubacivanje slika
+\usepackage[T1]{fontenc}
+\usepackage[serbian]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
 
 \title{Seminarski rad: Osnove matematičkog modeliranja}
-\author{Tvoje Ime i Prezime}
-\date{\today}
+\author{Milica Šuka 293/2021 \\ Petar Popović 75/2021}
+\date{jun 2026.}
 
 \begin{document}
 \maketitle
@@ -16,141 +17,286 @@
 U ovom seminarskom radu proučavamo dinamiku populacije uličnih pasa u zatvorenom staništu pod uticajem kontrole od strane šinterske službe. Modeliranje vršimo u kontinualnom vremenu, gde vreme $t$ merimo u godinama, a stanje populacije posmatramo preko gustine populacije $x(t)$, koja predstavlja broj jedinki po kvadratnom kilometru ($\text{jedinki/km}^2$).
 
 \subsection{Pretpostavke modela}
+
 Pre same matematičke formulacije, definišemo osnovne biološke i ekološke pretpostavke pod kojima razvijeni model važi:
 \begin{itemize}
-    \item \textbf{Zatvorenost staništa:} Pretpostavlja se da nema migracija, odnosno da su imigracija (doseljavanje) i emigracija (odseljavanje) pasa zanemarljive.
-    \item \textbf{Ograničenost resursa:} Resursi u okruženju (hrana, sklonište, prostor) su konačni. Maksimalni kapacitet sredine koji stanište može prirodno da podrži iznosi $K = 250 \, \text{jedinki/km}^2$.
+    \item \textbf{Zatvorenost staništa:} Pretpostavlja se da nema migracija, odnosno da su imigracija i emigracija pasa zanemarljive.
+    \item \textbf{Ograničenost resursa:} Resursi u okruženju, kao što su hrana, sklonište i prostor, jesu konačni. Maksimalni kapacitet sredine koji stanište može prirodno da podrži iznosi $K = 250 \, \text{jedinki/km}^2$.
     \item \textbf{Logistički rast:} U odsustvu spoljašnjih faktora, populacija se razmnožava po logističkom zakonu. Za malu gustinu populacije, konstantna stopa nataliteta iznosi $b = 0.34$, a stopa mortaliteta $d = 0.12$ na godišnjem nivou.
-    \item \textbf{Kontinuirana eutanazija:} Šinterska služba deluje neprekidno tokom godine i uklanja (hvata i eutanazira) konstantan procenat $\epsilon$ od trenutnog broja postojećih pasa. U daljem radu, parametar $\epsilon$ posmatramo kao udeo ($\epsilon \in [0,1]$).
+    \item \textbf{Kontinuirana eutanazija:} Šinterska služba deluje neprekidno tokom godine i uklanja konstantan procenat $\epsilon$ od trenutnog broja postojećih pasa. U daljem radu, parametar $\epsilon$ posmatramo kao udeo, odnosno $\epsilon \in [0,1]$.
 \end{itemize}
 
 \subsection{Formulacija diferencijalne jednačine}
-Inherentna (unutrašnja) stopa rasta populacije u uslovima neograničenih resursa predstavlja razliku između stope nataliteta i stope prirodnog mortaliteta:
-$$ r = b - d = 0.34 - 0.12 = 0.22 \, \text{godina}^{-1} $$
+
+Inherentna, odnosno unutrašnja stopa rasta populacije u uslovima neograničenih resursa predstavlja razliku između stope nataliteta i stope prirodnog mortaliteta:
+\begin{equation}
+r = b - d = 0.34 - 0.12 = 0.22 \, \text{godina}^{-1}.
+\end{equation}
 
 Klasičan logistički model rasta populacije bez uticaja čoveka opisan je diferencijalnom jednačinom:
-$$ \frac{dx}{dt} = r \cdot x \left(1 - \frac{x}{K}\right) $$
+\begin{equation}
+\frac{dx}{dt} = r x \left(1 - \frac{x}{K}\right).
+\end{equation}
 
 Uvođenjem stope eutanazije, koja direktno zavisi od trenutne gustine populacije $x(t)$, dobijamo konačnu nelinearnu običnu diferencijalnu jednačinu prvog reda koja opisuje naš model:
 \begin{equation}
-\frac{dx}{dt} = r \cdot x \left(1 - \frac{x}{K}\right) - \epsilon \cdot x
+\frac{dx}{dt} = r x \left(1 - \frac{x}{K}\right) - \epsilon x.
 \end{equation}
 
-Sređivanjem desne strane jednačine (1), model možemo zapisati u ekvivalentnom obliku pogodnom za analizu:
+Sređivanjem desne strane prethodne jednačine, model možemo zapisati u ekvivalentnom obliku pogodnom za analizu:
 \begin{equation}
-\frac{dx}{dt} = (r - \epsilon)x - \frac{r}{K}x^2
+\frac{dx}{dt} = (r - \epsilon)x - \frac{r}{K}x^2.
 \end{equation}
-
 
 \section{Analitičko rešenje diferencijalne jednačine}
 
-Kako bismo precizno analizirali ponašanje populacije uličnih pasa kroz vreme, jednačinu (2) rešićemo egzaktno (analitički). Uočavamo da je jednačina nelinearna obična diferencijalna jednačina prvog reda koja se može rešiti metodom razdvajanja promenljivih:
-$$ \frac{dx}{dt} = x \left( (r - \epsilon) - \frac{r}{K}x \right) $$
-
-Razdvajanjem promenljivih, pod pretpostavkom da je desna strana različita od nule, dobijamo:
+Kako bismo precizno analizirali ponašanje populacije uličnih pasa kroz vreme, jednačinu rešavamo egzaktno. Uočavamo da je jednačina nelinearna obična diferencijalna jednačina prvog reda koja se može rešiti metodom razdvajanja promenljivih:
 \begin{equation}
-\frac{dx}{x \left( (r - \epsilon) - \frac{r}{K}x \right)} = dt
+\frac{dx}{dt} = x \left((r - \epsilon) - \frac{r}{K}x\right).
 \end{equation}
 
-Integralićemo levu stranu jednačine (3) korišćenjem metode razlaganja podintegralne funkcije na proste razlomke:
-$$ \frac{1}{x \left( (r - \epsilon) - \frac{r}{K}x \right)} = \frac{A_0}{x} + \frac{B_0}{(r - \epsilon) - \frac{r}{K}x} $$
+Najpre posmatramo slučaj $\epsilon \neq r$. Razdvajanjem promenljivih, pod pretpostavkom da je desna strana različita od nule, dobijamo:
+\begin{equation}
+\frac{dx}{x \left((r - \epsilon) - \frac{r}{K}x\right)} = dt.
+\end{equation}
+
+Integralićemo levu stranu korišćenjem metode razlaganja podintegralne funkcije na proste razlomke:
+\begin{equation}
+\frac{1}{x \left((r - \epsilon) - \frac{r}{K}x\right)} = \frac{A_0}{x} + \frac{B_0}{(r - \epsilon) - \frac{r}{K}x}.
+\end{equation}
 
 Množenjem ove relacije sa zajedničkim imeniocem dobijamo identitet po $x$:
-$$ 1 = A_0(r - \epsilon) + \left( B_0 - A_0\frac{r}{K} \right)x $$
-
-Izjednačavanjem koeficijenata uz odgovarajuće stepene od $x$, dobijamo sistem jednačina iz kog sledi da je $A_0 = \frac{1}{r - \epsilon}$ i $B_0 = \frac{r}{K(r - \epsilon)}$. Sređivanjem integrala, integracija daje:
-$$ \frac{1}{r - \epsilon} \left( \ln|x| - \ln\left|(r - \epsilon) - \frac{r}{K}x\right| \right) = t + C_1 $$
-
-Množenjem cele jednačine sa $(r - \epsilon)$ i primenom osobina logaritma, a potom i eksponenciranjem obe strane jednačine, oslobađamo se logaritma:
 \begin{equation}
-\frac{x}{(r - \epsilon) - \frac{r}{K}x} = C \cdot e^{(r - \epsilon)t}
-\end{equation}
-gde je $C$ integraciona konstanta. Neka je u početnom trenutku $t=0$ poznata početna gustina populacije $x(0) = x_0$. Zamenom ovih vrednosti u jednačinu (4) određujemo konstantu $C$:
-$$ C = \frac{x_0}{(r - \epsilon) - \frac{r}{K}x_0} $$
-
-Iz jednačine (4) eksplicitno izražavamo rešenje $x(t)$ po vremenu i nakon sređivanja dobijamo \textbf{konačno analitičko rešenje}:
-\begin{equation}
-x(t) = \frac{(r - \epsilon)x_0}{\frac{r}{K}x_0 + \left(r - \epsilon - \frac{r}{K}x_0\right)e^{-(r - \epsilon)t}}
+1 = A_0(r - \epsilon) + \left(B_0 - A_0\frac{r}{K}\right)x.
 \end{equation}
 
+Izjednačavanjem koeficijenata uz odgovarajuće stepene od $x$, dobijamo:
+\begin{equation}
+A_0 = \frac{1}{r - \epsilon}, \qquad B_0 = \frac{r}{K(r - \epsilon)}.
+\end{equation}
+
+Sređivanjem integrala, integracija daje:
+\begin{equation}
+\frac{1}{r - \epsilon}\left(\ln|x| - \ln\left|(r - \epsilon) - \frac{r}{K}x\right|\right) = t + C_1.
+\end{equation}
+
+Množenjem cele jednačine sa $(r - \epsilon)$, primenom osobina logaritma i eksponenciranjem obe strane, dobijamo:
+\begin{equation}
+\frac{x}{(r - \epsilon) - \frac{r}{K}x} = C e^{(r - \epsilon)t},
+\end{equation}
+gde je $C$ integraciona konstanta.
+
+Neka je u početnom trenutku $t=0$ poznata početna gustina populacije $x(0)=x_0$. Zamenom ovih vrednosti određujemo konstantu $C$:
+\begin{equation}
+C = \frac{x_0}{(r - \epsilon) - \frac{r}{K}x_0}.
+\end{equation}
+
+Iz prethodne jednačine eksplicitno izražavamo rešenje $x(t)$ po vremenu i dobijamo konačno analitičko rešenje:
+\begin{equation}
+x(t) = \frac{(r - \epsilon)x_0}{\frac{r}{K}x_0 + \left(r - \epsilon - \frac{r}{K}x_0\right)e^{-(r - \epsilon)t}}.
+\end{equation}
+
+Posebno treba razmotriti granični slučaj $\epsilon = r$, jer tada prethodno izvođenje ne važi zbog pojavljivanja izraza $r-\epsilon$ u imeniocu. U tom slučaju jednačina postaje:
+\begin{equation}
+\frac{dx}{dt} = -\frac{r}{K}x^2.
+\end{equation}
+
+Razdvajanjem promenljivih dobijamo:
+\begin{equation}
+\frac{dx}{x^2} = -\frac{r}{K}dt.
+\end{equation}
+
+Integracijom sledi:
+\begin{equation}
+-\frac{1}{x} = -\frac{r}{K}t + C.
+\end{equation}
+
+Iz početnog uslova $x(0)=x_0$ dobijamo konačno rešenje:
+\begin{equation}
+x(t) = \frac{x_0}{1 + \frac{r}{K}x_0t}.
+\end{equation}
+
+Dakle, i za $\epsilon=r$ populacija teži nuli kada $t \to \infty$, ali opadanje nije eksponencijalno, već je sporije i opisano je racionalnom funkcijom.
 
 \section{Diskusija rešenja za zadate stope eutanazije}
 
-Kvalitativna analiza modela i stabilnost populacije zavise od stacionarnih stanja (tačaka ravnoteže) koje dobijamo izjednačavanjem desne strane jednačine (2) sa nulom:
-$$ x \left( (r - \epsilon) - \frac{r}{K}x \right) = 0 \implies x_1^* = 0, \quad x_2^* = K\left(1 - \frac{\epsilon}{r}\right) $$
+Kvalitativna analiza modela i stabilnost populacije zavise od stacionarnih stanja, odnosno tačaka ravnoteže, koje dobijamo izjednačavanjem desne strane jednačine sa nulom:
+\begin{equation}
+x \left((r - \epsilon) - \frac{r}{K}x\right) = 0.
+\end{equation}
 
-U zavisnosti od vrednosti parametra $\epsilon$ koji kontroliše šinterska služba, razlikujemo dva suštinski različita biološka scenarija, što potvrđujemo i numeričkim eksperimentom u MATLAB-u (pomoću funkcije \texttt{ode45}), uz pretpostavljenu početnu gustinu populacije $x_0 = 150 \, \text{jedinki/km}^2$ u periodu od 50 godina.
+Odavde dobijamo dve ravnotežne tačke:
+\begin{equation}
+x_1^* = 0, \qquad x_2^* = K\left(1 - \frac{\epsilon}{r}\right).
+\end{equation}
+
+Druga ravnotežna tačka $x_2^*$ ima biološki smisao samo kada je $\epsilon < r$, jer je tada pozitivna. Ako je $\epsilon > r$, vrednost $x_2^*$ je negativna, pa ne može predstavljati gustinu populacije pasa.
+
+U zavisnosti od vrednosti parametra $\epsilon$ koji kontroliše šinterska služba, razlikujemo dva suštinski različita biološka scenarija, što potvrđujemo i numeričkim eksperimentom u MATLAB-u, pomoću funkcije \texttt{ode45}, uz pretpostavljenu početnu gustinu populacije $x_0 = 150 \, \text{jedinki/km}^2$ u periodu od 50 godina.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{grafik_pasa.png}
+    \IfFileExists{grafik_pasa.png}{\includegraphics[width=0.8\textwidth]{grafik_pasa.png}}{\fbox{\parbox{0.8\textwidth}{Ovde treba ubaciti sliku \texttt{grafik\_pasa.png}.}}}
     \caption{Simulacija kretanja gustine populacije uličnih pasa kroz vreme bez spoljašnjeg priliva.}
     \label{fig:grafik_pasa}
 \end{figure}
 
 Na osnovu teorijske analize i generisanog grafika sa slike \ref{fig:grafik_pasa}, diskutujemo sledeće slučajeve:
 \begin{enumerate}
-    \item \textbf{Slučaj $\epsilon = 0.36$ i $\epsilon = 0.25$:} Stopa eutanazije je veća od stope rasta ($\epsilon > r = 0.22$). Član $r - \epsilon$ je negativan, pa u limitu $t \to \infty$ populacija teži tački $x_1^* = 0$. Crvena linija ($\epsilon = 0.36$) opada najbrže i dovodi do izumiranja oko 25. godine, dok zelena linija ($\epsilon = 0.25$) sporije teži nuli.
-    \item \textbf{Slučaj $\epsilon = 0.14$:} Stopa eutanazije je manja od stope priraštaja ($\epsilon < r$). Pošto je $r - \epsilon > 0$, populacija opstaje i stabilizuje se na nivou: $x_2^* = 250 \cdot (1 - \frac{0.14}{0.22}) \approx 90.91 \, \text{jedinki/km}^2$, što plava linija i potvrđuje.
+    \item \textbf{Slučaj $\epsilon = 0.36$ i $\epsilon = 0.25$:} Stopa eutanazije je veća od stope rasta, odnosno $\epsilon > r = 0.22$. Član $r - \epsilon$ je negativan, pa u limitu $t \to \infty$ populacija teži tački $x_1^* = 0$. Crvena linija, koja odgovara vrednosti $\epsilon = 0.36$, opada najbrže i oko 25. godine postaje veoma bliska nuli, odnosno praktično zanemarljiva, dok zelena linija, koja odgovara vrednosti $\epsilon = 0.25$, sporije teži nuli.
+    \item \textbf{Slučaj $\epsilon = 0.14$:} Stopa eutanazije je manja od stope priraštaja, odnosno $\epsilon < r$. Pošto je $r - \epsilon > 0$, populacija opstaje i stabilizuje se na nivou:
+    \begin{equation}
+    x_2^* = 250 \left(1 - \frac{0.14}{0.22}\right) \approx 90.91 \, \text{jedinki/km}^2.
+    \end{equation}
+    To potvrđuje i plava linija na grafiku.
 \end{enumerate}
-
 
 \section{Prošireni model sa prilivom napuštenih pasa}
 
-U ovom delu rada proširujemo osnovni model uvođenjem realistične pretpostavke o neodgovornom vlasništvu. Pretpostavlja se da svake godine konstantan broj $A$ napuštenih pasa (po $\text{km}^2$) biva izbačen na ulicu i time oni postaju deo populacije uličnih pasa. 
+U ovom delu rada proširujemo osnovni model uvođenjem realistične pretpostavke o neodgovornom vlasništvu. Pretpostavlja se da svake godine konstantan broj $A$ napuštenih pasa, po $\text{km}^2$, biva izbačen na ulicu i time oni postaju deo populacije uličnih pasa.
 
 Nova diferencijalna jednačina koja opisuje ovaj proces ima oblik:
 \begin{equation}
-\frac{dx}{dt} = r \cdot x \left(1 - \frac{x}{K}\right) - \epsilon \cdot x + A
+\frac{dx}{dt} = r x \left(1 - \frac{x}{K}\right) - \epsilon x + A.
 \end{equation}
+
 Sređivanjem izraza po opadajućim stepenima promenljive $x$, dobijamo kvadratnu formu sa desne strane:
 \begin{equation}
-\frac{dx}{dt} = -\frac{r}{K}x^2 + (r - \epsilon)x + A
+\frac{dx}{dt} = -\frac{r}{K}x^2 + (r - \epsilon)x + A.
 \end{equation}
 
 \subsection{Stabilna stanja proširenog modela}
-Tačke ravnoteže dobijamo rešavanjem kvadratne jednačine $-\frac{r}{K}x^2 + (r - \epsilon)x + A = 0$, odnosno:
-$$ \frac{r}{K}x^2 - (r - \epsilon)x - A = 0 $$
+
+Tačke ravnoteže dobijamo rešavanjem kvadratne jednačine:
+\begin{equation}
+-\frac{r}{K}x^2 + (r - \epsilon)x + A = 0.
+\end{equation}
+
+Ekvivalentno, dobijamo:
+\begin{equation}
+\frac{r}{K}x^2 - (r - \epsilon)x - A = 0.
+\end{equation}
 
 Korišćenjem kvadratne formule, rešenja za tačke ravnoteže su:
 \begin{equation}
-x_{1,2}^* = \frac{(r - \epsilon) \pm \sqrt{(r - \epsilon)^2 + 4 \frac{r}{K}A}}{2\frac{r}{K}}
+x_{1,2}^* = \frac{(r - \epsilon) \pm \sqrt{(r - \epsilon)^2 + 4\frac{r}{K}A}}{2\frac{r}{K}}.
 \end{equation}
 
-Budući da su parametri $r, K, A > 0$, diskriminanta pod korenom $D = (r - \epsilon)^2 + 4 \frac{r}{K}A$ je strogo pozitivna za svako $\epsilon$, što znači da uvek postoje dva realna rešenja. Fizički i biološki smisao ima samo pozitivno rešenje:
+Budući da su parametri $r$, $K$ i $A$ pozitivni, diskriminanta:
 \begin{equation}
-x^* = \frac{(r - \epsilon) + \sqrt{(r - \epsilon)^2 + 4 \frac{r}{K}A}}{2\frac{r}{K}}
+D = (r - \epsilon)^2 + 4\frac{r}{K}A
+\end{equation}
+strogo je pozitivna za svako $\epsilon$, što znači da uvek postoje dva realna rešenja. Fizički i biološki smisao ima samo pozitivno rešenje:
+\begin{equation}
+x_+ = \frac{(r - \epsilon) + \sqrt{(r - \epsilon)^2 + 4\frac{r}{K}A}}{2\frac{r}{K}}.
 \end{equation}
 
-Uočavamo ključnu promenu: \textbf{Tačka ravnoteže $x^* = 0$ više ne postoji kao rešenje sistema dokle god je $A > 0$}. To znači da se ulični psi više ne mogu u potpunosti istrebiti na duži rok, jer čak i ako u nekom trenutku broj pasa spadne na nulu, konstantan priliv $A$ odmah ponovo pokreće rast populacije.
+Drugo rešenje označavamo sa:
+\begin{equation}
+x_- = \frac{(r - \epsilon) - \sqrt{(r - \epsilon)^2 + 4\frac{r}{K}A}}{2\frac{r}{K}}.
+\end{equation}
+
+Za $A>0$ važi $x_+>0$ i $x_-<0$, pa samo $x_+$ ima biološki smisao kao gustina populacije.
+
+\subsection{Analitičko rešenje proširenog modela}
+
+Proširenu diferencijalnu jednačinu možemo zapisati pomoću njenih ravnotežnih tačaka u obliku:
+\begin{equation}
+\frac{dx}{dt} = -\frac{r}{K}(x-x_+)(x-x_-).
+\end{equation}
+
+Razdvajanjem promenljivih dobijamo:
+\begin{equation}
+\frac{dx}{(x-x_+)(x-x_-)} = -\frac{r}{K}dt.
+\end{equation}
+
+Levu stranu razlažemo na proste razlomke:
+\begin{equation}
+\frac{1}{(x-x_+)(x-x_-)} = \frac{1}{x_+-x_-}\left(\frac{1}{x-x_+} - \frac{1}{x-x_-}\right).
+\end{equation}
+
+Integracijom dobijamo:
+\begin{equation}
+\frac{1}{x_+-x_-}\ln\left|\frac{x-x_+}{x-x_-}\right| = -\frac{r}{K}t + C_1.
+\end{equation}
+
+Množenjem prethodne jednačine sa $x_+-x_-$ i eksponenciranjem sledi:
+\begin{equation}
+\frac{x-x_+}{x-x_-} = C e^{-\lambda t},
+\end{equation}
+gde je:
+\begin{equation}
+\lambda = \frac{r}{K}(x_+-x_-).
+\end{equation}
+
+Iz početnog uslova $x(0)=x_0$ dobijamo:
+\begin{equation}
+C = \frac{x_0-x_+}{x_0-x_-}.
+\end{equation}
+
+Eksplicitnim izražavanjem funkcije $x(t)$ dobijamo:
+\begin{equation}
+x(t) = \frac{x_+ - C e^{-\lambda t}x_-}{1 - C e^{-\lambda t}}.
+\end{equation}
+
+Pošto je $\lambda>0$, važi $e^{-\lambda t} \to 0$ kada $t \to \infty$, pa iz prethodne formule sledi:
+\begin{equation}
+\lim_{t\to\infty}x(t)=x_+.
+\end{equation}
+
+Uočavamo ključnu promenu: \textbf{Tačka ravnoteže $x^* = 0$ više ne postoji kao rešenje sistema dokle god je $A > 0$}. To znači da se ulični psi više ne mogu u potpunosti istrebiti na duži rok, jer čak i ako u nekom trenutku broj pasa spadne na nulu, konstantan priliv $A$ odmah ponovo pokreće rast populacije. Dugoročno, populacija teži pozitivnoj ravnotežnoj vrednosti $x_+$.
 
 \subsection{Numerički eksperiment i grafički prikaz}
-Da bismo vizuelizovali ponašanje proširenog modela, sprovodimo numerički eksperiment u MATLAB-u uzimajući pretpostavljenu vrednost priliva $A = 10 \, \text{pasa/km}^2$ godišnje, dok ostali parametri i početni uslov ($x_0 = 150$) ostaju isti.
+
+Da bismo vizuelizovali ponašanje proširenog modela, sprovodimo numerički eksperiment u MATLAB-u uzimajući pretpostavljenu vrednost priliva $A = 10 \, \text{pasa/km}^2$ godišnje, dok ostali parametri i početni uslov, $x_0 = 150$, ostaju isti.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{grafik_napusteni.png}
+    \IfFileExists{grafik_napusteni.png}{\includegraphics[width=0.8\textwidth]{grafik_napusteni.png}}{\fbox{\parbox{0.8\textwidth}{Ovde treba ubaciti sliku \texttt{grafik\_napusteni.png}.}}}
     \caption{Dinamika populacije sa konstantnim godišnjim prilivom napuštenih pasa $A = 10$.}
     \label{fig:grafik_napusteni}
 \end{figure}
 
 Na osnovu slike \ref{fig:grafik_napusteni} uočavamo sledeće:
 \begin{itemize}
-    \item Za $\epsilon = 0.36$ (crvena linija) i $\epsilon = 0.25$ (zelena linija), iako je intenzitet eutanazije veći od prirodnog priraštaja, populacija ne izumire. Krive asimptotski prilaze novoj stabilnoj vrednosti koja je strogo veća od nule. Zamenom vrednosti u formulu (9) dobijamo da se za $\epsilon=0.36$ populacija stabilizuje na oko $54 \, \text{jedinki/km}^2$.
-    \item Za $\epsilon = 0.14$ (plava linija), populacija se stabilizuje na značajno višem nivou nego u prvom delu rada (oko $162 \, \text{jedinki/km}^2$), jer se na prirodni priraštaj konstantno dodaju i napušteni psi vlasnika.
+    \item Za $\epsilon = 0.36$, odnosno za crvenu liniju, iako je intenzitet eutanazije veći od prirodnog priraštaja, populacija ne izumire. Kriva asimptotski prilazi novoj stabilnoj vrednosti koja je strogo veća od nule. Zamenom vrednosti u formulu za $x_+$ dobijamo da se populacija stabilizuje na oko $53.46 \, \text{jedinki/km}^2$.
+    \item Za $\epsilon = 0.25$, odnosno za zelenu liniju, populacija se takođe ne može istrebiti, već se stabilizuje na približno $90.91 \, \text{jedinki/km}^2$.
+    \item Za $\epsilon = 0.14$, odnosno za plavu liniju, populacija se stabilizuje na značajno višem nivou nego u prvom delu rada, približno $161.34 \, \text{jedinki/km}^2$, jer se na prirodni priraštaj konstantno dodaju i napušteni psi vlasnika.
 \end{itemize}
 
 \section{Zaključak}
-Kroz ovaj rad smo pokazali moć matematičkog modeliranja u ekologiji i upravljanju komunalnim problemima. Dok je u idealnom slučaju (bez neodgovornog vlasništva) agresivna eutanazija mogla dovesti do potpunog uklanjanja problema uličnih pasa, u realnom scenariju gde postoji konstantan priliv $A$, istrebljenje je nemoguće. Jedina održiva strategija jeste kombinacija kontrole populacije i drastičnog smanjenja parametra $A$ kroz zakonske regulative i čipovanje kućnih ljubimaca.
+
+Kroz ovaj rad smo pokazali moć matematičkog modeliranja u ekologiji i upravljanju komunalnim problemima. Dok je u idealnom slučaju, bez stalnog priliva napuštenih pasa, dovoljno velika stopa eutanazije mogla dovesti do toga da populacija asimptotski teži nuli, u realističnijem scenariju gde postoji konstantan priliv $A$, potpuno istrebljenje nije moguće. Tada populacija dugoročno teži pozitivnoj ravnotežnoj vrednosti $x_+$. Zato održiva strategija ne može biti zasnovana samo na uklanjanju pasa sa ulice, već mora uključiti i smanjenje parametra $A$, na primer kroz odgovorno vlasništvo, zakonske regulative i čipovanje kućnih ljubimaca.
 
 \newpage
 \begin{thebibliography}{9}
-\bibitem{logisticki} 
+
+\bibitem{logisticki}
 J. D. Murray, \textit{Mathematical Biology: I. An Introduction}, Springer-Verlag, New York, 2002.
+
 \bibitem{diferencijalne}
 M. Braun, \textit{Differential Equations and Their Applications}, Springer, 1993.
+
 \bibitem{matlab}
 The MathWorks Inc., \textit{MATLAB and Simulink for Modeling and Simulation}, R2025b.
+
 \end{thebibliography}
+
+\newpage
+\begin{center}
+    \Large \textbf{Izjava o autorstvu}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+    \textit{Na ovu stranicu ubaciti popunjenu, potpisanu i skeniranu/uslikanu Izjavu o autorstvu.}
+\end{center}
+
+\vspace{1cm}
+
+% Kada budete imali sliku izjave, stavite je u isti folder gde je i .tex fajl.
+% Ako se slika zove izjava_o_autorstvu.jpg, uklonite znak % ispred naredne linije:
+% \includegraphics[width=\textwidth]{izjava_o_autorstvu.jpg}
 
 \end{document}
