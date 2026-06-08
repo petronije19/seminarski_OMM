@@ -1,4 +1,4 @@
-% Seminarski rad iz OMM - Drugi deo: Prošireni model sa prilivom A
+% Prošireni model sa prilivom A
 clear all; clc; close all;
 
 % Definisanje parametara modela
@@ -8,7 +8,6 @@ A = 10;         % Konstantan priliv napuštenih pasa godišnje (po km^2)
 tspan = [0 50]; % Vremenski period simulacije (50 godina)
 x0 = 150;       % Početna gustina populacije pasa
 
-% Vrednosti parametra epsilon koje je profesorka zadala
 epsilons = [0.36, 0.25, 0.14];
 boje = {'r', 'g', 'b'}; % Crvena, zelena, plava boja za grafike
 
@@ -26,7 +25,7 @@ for i = 1:length(epsilons)
     plot(t, x, boje{i}, 'LineWidth', 2);
 end
 
-% Uređivanje grafika (Oznake osa, naslov i legenda sa našim slovima)
+% Uređivanje grafika
 xlabel('Vreme t [godine]', 'FontSize', 12);
 ylabel('Gustina populacije x(t) [jedinki/km^2]', 'FontSize', 12);
 title('Dinamika populacije pasa sa konstantnim prilivom A = 10', 'FontSize', 14);
@@ -36,5 +35,4 @@ legend('\epsilon = 0.36 (Stabilizacija iznad nule)', ...
        'Location', 'Best');
 grid on;
 
-% Automatsko čuvanje slike u folderu pod ispravnim imenom
 saveas(gcf, 'grafik_napusteni.png');
